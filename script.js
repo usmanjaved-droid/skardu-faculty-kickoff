@@ -201,23 +201,41 @@ const programDays = [
     }
 ];
 
-// Render Program Timeline
+// Render Program Calendar
 function renderProgram() {
-    const timeline = document.querySelector('.program-timeline');
-    if (!timeline) {
-        console.error('Element .program-timeline not found');
+    const container = document.querySelector('.calendar-view');
+    if (!container) {
+        console.error('Element .calendar-view not found');
         return;
     }
-    timeline.innerHTML = programDays.map(day => `
-        <div class="day-card">
-            <div class="day-header">${day.day}</div>
-            <div class="day-theme">${day.theme}</div>
-            <p class="day-date">${day.date}</p>
-            <ul class="day-highlights">
-                ${day.highlights.map(h => `<li>${h}</li>`).join('')}
-            </ul>
-        </div>
-    `).join('');
+
+    // Generate calendar for all 8 days
+    const calendarHTML = detailedSchedule.map((day, dayIndex) => {
+        const dateObj = new Date(2026, 5, 7 + dayIndex); // June 7-14, 2026
+        const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+        const dayNum = 7 + dayIndex;
+
+        return `
+            <div class="calendar-day-column">
+                <div class="calendar-day-header">
+                    <div class="calendar-day-name">${dayName}</div>
+                    <div class="calendar-day-date">Jun ${dayNum}</div>
+                    <div class="calendar-day-theme">${day.theme}</div>
+                </div>
+                <div class="calendar-day-content">
+                    ${day.blocks.map(block => `
+                        <div class="calendar-time-block" data-time="${block.time}">
+                            <div class="block-time">${block.time}</div>
+                            <div class="block-activity">${block.activity}</div>
+                            <div class="block-details">${block.details}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    container.innerHTML = `<div class="calendar-grid-view">${calendarHTML}</div>`;
 }
 
 // Engagement Activities Data
@@ -363,40 +381,7 @@ const detailedSchedule = [
     }
 ];
 
-// Render Program Calendar
-function renderDetailedSchedule() {
-    const container = document.querySelector('.program-calendar');
-    if (!container) {
-        console.error('Element .program-calendar not found');
-        return;
-    }
-
-    // Create calendar grid
-    const calendarHTML = `
-        <div class="calendar-header">
-            <div class="calendar-month">June 2026</div>
-        </div>
-        <div class="calendar-grid">
-            ${detailedSchedule.map((day, index) => {
-                const dayNum = 7 + index; // June 7-14
-                const dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][index];
-                const topActivities = day.blocks.slice(1, 3).map(b => b.activity).join(' • ');
-
-                return `
-                    <div class="calendar-day">
-                        <div class="calendar-day-num">${dayNum}</div>
-                        <div class="calendar-day-name">${dayOfWeek}</div>
-                        <div class="calendar-day-label">${day.day}</div>
-                        <div class="calendar-day-theme">${day.theme}</div>
-                        <div class="calendar-day-activities">${topActivities}</div>
-                    </div>
-                `;
-            }).join('')}
-        </div>
-    `;
-
-    container.innerHTML = calendarHTML;
-}
+// Detailed schedule rendering not needed (calendar view integrated into program section)
 
 // Initialize all functions on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -404,5 +389,4 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFacultyRoles();
     renderProgram();
     renderActivities();
-    renderDetailedSchedule();
 });
