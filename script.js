@@ -114,7 +114,7 @@ const facultyRoles = [
     {
         name: "Nadir Shams + Sabeena Abbasi",
         coreSessions: "Communications (D5)",
-        clinics: "—",
+        clinics: "Day 3",
         coaching: "Day 5"
     },
     {
