@@ -363,31 +363,39 @@ const detailedSchedule = [
     }
 ];
 
-// Render Detailed Schedule
+// Render Program Calendar
 function renderDetailedSchedule() {
-    const container = document.querySelector('.detailed-schedule');
+    const container = document.querySelector('.program-calendar');
     if (!container) {
-        console.error('Element .detailed-schedule not found');
+        console.error('Element .program-calendar not found');
         return;
     }
-    container.innerHTML = detailedSchedule.map(day => `
-        <div class="schedule-day">
-            <div class="schedule-day-header">
-                <h3>${day.day} — ${day.date}</h3>
-            </div>
-            <div class="schedule-blocks">
-                ${day.blocks.map(block => `
-                    <div class="schedule-block">
-                        <div class="schedule-time">${block.time}</div>
-                        <div class="schedule-content">
-                            <div class="schedule-activity">${block.activity}</div>
-                            <div class="schedule-details">${block.details}</div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
+
+    // Create calendar grid
+    const calendarHTML = `
+        <div class="calendar-header">
+            <div class="calendar-month">June 2026</div>
         </div>
-    `).join('');
+        <div class="calendar-grid">
+            ${detailedSchedule.map((day, index) => {
+                const dayNum = 7 + index; // June 7-14
+                const dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][index];
+                const topActivities = day.blocks.slice(1, 3).map(b => b.activity).join(' • ');
+
+                return `
+                    <div class="calendar-day">
+                        <div class="calendar-day-num">${dayNum}</div>
+                        <div class="calendar-day-name">${dayOfWeek}</div>
+                        <div class="calendar-day-label">${day.day}</div>
+                        <div class="calendar-day-theme">${day.theme}</div>
+                        <div class="calendar-day-activities">${topActivities}</div>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+
+    container.innerHTML = calendarHTML;
 }
 
 // Initialize all functions on page load
