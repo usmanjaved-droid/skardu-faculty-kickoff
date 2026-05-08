@@ -506,6 +506,70 @@ li {
     margin: 0;
 }
 
+/* Detailed Schedule */
+.detailed-schedule {
+    margin: 2rem 0;
+}
+
+.schedule-day {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.schedule-day-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #667eea;
+    padding: 1.5rem;
+}
+
+.schedule-day-header h3 {
+    margin: 0;
+    color: #667eea;
+    font-size: 1.2rem;
+}
+
+.schedule-blocks {
+    padding: 0;
+}
+
+.schedule-block {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1.5rem;
+}
+
+.schedule-block:last-child {
+    border-bottom: none;
+}
+
+.schedule-time {
+    font-weight: 600;
+    color: #667eea;
+    min-width: 80px;
+    margin-right: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.schedule-content {
+    flex: 1;
+}
+
+.schedule-activity {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+}
+
+.schedule-details {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav-menu {

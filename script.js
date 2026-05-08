@@ -103,13 +103,13 @@ const facultyRoles = [
         name: "Dr. Sara Saeed Khurram",
         coreSessions: "Spotlight session (D5)",
         clinics: "Day 3",
-        coaching: "—"
+        coaching: "Day 5"
     },
     {
         name: "Sarah Farooq",
-        coreSessions: "—",
+        coreSessions: "Fellow Engagement Management",
         clinics: "Day 3",
-        coaching: "—"
+        coaching: "Day 5"
     },
     {
         name: "Nadir Shams + Sabeena Abbasi",
@@ -120,8 +120,8 @@ const facultyRoles = [
     {
         name: "Haroon Yasin",
         coreSessions: "Open Sourcing (D4, pending)",
-        clinics: "—",
-        coaching: "—"
+        clinics: "Day 3",
+        coaching: "Day 5"
     }
 ];
 
@@ -271,10 +271,130 @@ function renderActivities() {
     `).join('');
 }
 
+// Detailed Schedule Data
+const detailedSchedule = [
+    {
+        day: "Day 0",
+        date: "Sunday, June 7",
+        blocks: [
+            { time: "07:00", activity: "✈️ ARRIVALS & CHECK-IN", details: "Staggered arrivals, airport pickups, check-in, welcome tea" },
+            { time: "18:30", activity: "🍽️ WELCOME DINNER", details: "6:30 – 7:30 PM, Relaxed seated dinner" },
+            { time: "19:30", activity: "ORIENTATION", details: "7:30 – 9:00 PM, Introductions, norm setting, week overview" },
+            { time: "23:00", activity: "⚠️ CUT OFF: 11 PM", details: "End of day" }
+        ]
+    },
+    {
+        day: "Day 1",
+        date: "Monday, June 8",
+        blocks: [
+            { time: "07:30", activity: "WELCOME BREAKFAST", details: "7:30 – 8:30 AM, Mulago-style icebreaker" },
+            { time: "09:00", activity: "DESIGN FOR IMPACT AT SCALE (Block 1)", details: "9:00 – 10:30 AM, Mission, Big Idea, Theory" },
+            { time: "11:00", activity: "DESIGN FOR IMPACT AT SCALE (Block 2)", details: "11:00 AM – 1:00 PM, Model, Behavior Map" },
+            { time: "14:00", activity: "DOER & PAYER AT SCALE + SCALABILITY", details: "2:00 – 5:30 PM, Four Enoughs, Evidence Progression" },
+            { time: "18:00", activity: "INTEGRATION + SYNTHESIS", details: "6:00 – 7:30 PM, Reflection, peer feedback, One-pager draft due" }
+        ]
+    },
+    {
+        day: "Day 2",
+        date: "Tuesday, June 9",
+        blocks: [
+            { time: "07:00", activity: "YOGA / MORNING WALK / MEDITATION (optional)", details: "7:00 – 7:30 AM" },
+            { time: "09:00", activity: "SCALE STRATEGY — PART 1", details: "9:00 – 10:30 AM, Scale Screen Framework" },
+            { time: "11:00", activity: "SCALE STRATEGY — PART 2", details: "11:00 AM – 1:00 PM, Applying to Your Org" },
+            { time: "14:00", activity: "IMPACT EVIDENCE", details: "2:00 – 5:00 PM, Levels of Evidence, Evidence Plans" },
+            { time: "17:30", activity: "⚡ FELLOWS LIGHTNING TALKS", details: "5:30 – 7:30 PM, 5 × 8-min talks + Q&A" },
+            { time: "20:30", activity: "⚡ FIRESIDE CHAT WITH KEVIN", details: "8:30 – 10:00 PM, Kevin's Story + Q&A" }
+        ]
+    },
+    {
+        day: "Day 3",
+        date: "Wednesday, June 10",
+        blocks: [
+            { time: "07:30", activity: "BREAKFAST", details: "7:30 – 8:30 AM" },
+            { time: "08:30", activity: "🚐 TRAVEL TO CHINDA VALLEY", details: "8:30 – 10:00 AM, Outdoor location setup" },
+            { time: "10:30", activity: "STRUCTURED 1-ON-1s WITH FACULTY (Block A)", details: "10:30 AM – 1:00 PM, 45-min rotating sessions" },
+            { time: "14:00", activity: "STRUCTURED 1-ON-1s WITH FACULTY (Block B)", details: "2:00 – 4:00 PM, Continued rotating sessions" },
+            { time: "16:00", activity: "🏔️ SIGHTSEEING + ACTIVITIES", details: "4:00 – 6:00 PM, Optional outdoor activities" },
+            { time: "20:30", activity: "INTERACTIVE SESSION WITH FACULTY", details: "8:30 – 11:00 PM, Lightning talks + Moderated sessions" }
+        ]
+    },
+    {
+        day: "Day 4",
+        date: "Thursday, June 11",
+        blocks: [
+            { time: "07:00", activity: "YOGA / MORNING WALK / MEDITATION (optional)", details: "7:00 – 7:30 AM" },
+            { time: "09:00", activity: "THE ITERATIVE ORGANIZATION (Block 1)", details: "9:00 AM – 1:00 PM, Theory, methods, data flows" },
+            { time: "14:30", activity: "ITERATIVE ORG WORKSHOP + People/Culture Deep Dive", details: "2:30 – 5:30 PM, Apply theory to your org" },
+            { time: "17:30", activity: "FACULTY TALKS", details: "5:30 – 7:00 PM, Running tea + snacks" }
+        ]
+    },
+    {
+        day: "Day 5",
+        date: "Friday, June 12",
+        blocks: [
+            { time: "07:00", activity: "MINDFULNESS / MORNING WALK (optional)", details: "7:00 – 7:30 AM" },
+            { time: "09:00", activity: "COMMUNICATIONS — THEORY", details: "9:00 AM – 1:00 PM, Clear language, narrative structure, pitching" },
+            { time: "14:30", activity: "CAPACITY CLINIC A: Building YOUR Presentation", details: "2:30 – 5:30 PM, Small group pitch prep" },
+            { time: "18:00", activity: "CAPACITY CLINIC B: 1:1 Pitch Coaching", details: "6:00 – 7:30 PM, Rotating faculty coaches" },
+            { time: "19:30", activity: "🎭 CULTURAL NIGHT", details: "7:30 – 9:30 PM, Cultural dress, snacks, live music, BBQ" }
+        ]
+    },
+    {
+        day: "Day 6",
+        date: "Saturday, June 13",
+        blocks: [
+            { time: "07:30", activity: "BREAKFAST", details: "7:30 – 8:30 AM" },
+            { time: "09:00", activity: "FINAL PREP + DRESS REHEARSAL", details: "9:00 – 10:30 AM" },
+            { time: "10:30", activity: "★ DEMO DAY — BLOCK 1 ★", details: "10:30 AM – 1:00 PM, Participant presentations" },
+            { time: "14:00", activity: "★ DEMO DAY — BLOCK 2 ★", details: "2:00 – 4:00 PM, Remaining presentations" },
+            { time: "16:00", activity: '"WHAT\'S NEXT?" WRAP', details: "4:00 – 5:00 PM, Tea/Coffee + Snacks" },
+            { time: "17:00", activity: "OPEN NETWORKING", details: "5:00 – 7:00 PM" },
+            { time: "19:00", activity: "🎉 CLOSING CELEBRATION DINNER", details: "7:00 – 9:00 PM, Open networking" }
+        ]
+    },
+    {
+        day: "Day 7",
+        date: "Sunday, June 14",
+        blocks: [
+            { time: "07:30", activity: "BREAKFAST", details: "7:30 – 8:30 AM" },
+            { time: "08:30", activity: "✈️ DEPARTURES", details: "From 8:00 AM onwards, Staggered checkouts" },
+            { time: "Optional", activity: "🏔️ KARAKORAM EXCURSION", details: "For those with later flights" }
+        ]
+    }
+];
+
+// Render Detailed Schedule
+function renderDetailedSchedule() {
+    const container = document.querySelector('.detailed-schedule');
+    if (!container) {
+        console.error('Element .detailed-schedule not found');
+        return;
+    }
+    container.innerHTML = detailedSchedule.map(day => `
+        <div class="schedule-day">
+            <div class="schedule-day-header">
+                <h3>${day.day} — ${day.date}</h3>
+            </div>
+            <div class="schedule-blocks">
+                ${day.blocks.map(block => `
+                    <div class="schedule-block">
+                        <div class="schedule-time">${block.time}</div>
+                        <div class="schedule-content">
+                            <div class="schedule-activity">${block.activity}</div>
+                            <div class="schedule-details">${block.details}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
 // Initialize all functions on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderFellows();
     renderFacultyRoles();
     renderProgram();
     renderActivities();
+    renderDetailedSchedule();
 });
