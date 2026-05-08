@@ -430,6 +430,17 @@ li {
     line-height: 1.6;
 }
 
+.day-date {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.activity-day {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 0.6rem;
+}
+
 /* Lists and Checklists */
 .checklist, .provides-list, .bring-list, .timeline-list {
     list-style: none;

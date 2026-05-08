@@ -71,6 +71,10 @@ const fellows = [
 // Render Fellows Grid
 function renderFellows() {
     const grid = document.querySelector('.fellows-grid');
+    if (!grid) {
+        console.error('Element .fellows-grid not found');
+        return;
+    }
     grid.innerHTML = fellows.map(fellow => `
         <div class="fellow-card">
             <div class="fellow-name">${fellow.name}</div>
@@ -124,6 +128,10 @@ const facultyRoles = [
 // Render Faculty Roles Table
 function renderFacultyRoles() {
     const table = document.querySelector('.roles-table');
+    if (!table) {
+        console.error('Element .roles-table not found');
+        return;
+    }
     const rows = facultyRoles.map(role => `
         <div class="table-row">
             <div class="col col-1">${role.name}</div>
@@ -133,7 +141,12 @@ function renderFacultyRoles() {
         </div>
     `).join('');
 
-    table.innerHTML += rows;
+    const headerRow = table.querySelector('.table-row.header');
+    if (headerRow) {
+        headerRow.insertAdjacentHTML('afterend', rows);
+    } else {
+        table.innerHTML = rows;
+    }
 }
 
 // Program Timeline Data
@@ -191,11 +204,15 @@ const programDays = [
 // Render Program Timeline
 function renderProgram() {
     const timeline = document.querySelector('.program-timeline');
+    if (!timeline) {
+        console.error('Element .program-timeline not found');
+        return;
+    }
     timeline.innerHTML = programDays.map(day => `
         <div class="day-card">
             <div class="day-header">${day.day}</div>
             <div class="day-theme">${day.theme}</div>
-            <p style="font-size: 0.9rem; color: #999;">${day.date}</p>
+            <p class="day-date">${day.date}</p>
             <ul class="day-highlights">
                 ${day.highlights.map(h => `<li>${h}</li>`).join('')}
             </ul>
@@ -240,11 +257,15 @@ const activities = [
 // Render Activities Grid
 function renderActivities() {
     const grid = document.querySelector('.activities-grid');
+    if (!grid) {
+        console.error('Element .activities-grid not found');
+        return;
+    }
     grid.innerHTML = activities.map(activity => `
         <div class="activity-card">
             <div class="activity-icon">🎯</div>
             <div class="activity-name">${activity.name}</div>
-            <p style="font-size: 0.85rem; color: #999; margin-bottom: 0.6rem;">${activity.day}</p>
+            <p class="activity-day">${activity.day}</p>
             <p class="activity-desc">${activity.desc}</p>
         </div>
     `).join('');
